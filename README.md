@@ -7,7 +7,7 @@ simple file hosting platform
 - auto-expire after X days and X downloads
 - previews for media (image, video, audio)
 
-## how to use
+# how to use
 1. install python3
 2. install requirements: `pip install -r requirements.txt`
 3. set an uploadfolder and secret_key in app.py
