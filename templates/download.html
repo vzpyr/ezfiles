@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta property="og:title" content="ezfiles 📁">
+        <meta property="og:description" content="share anything you want">
+        <meta property="og:image" content="{{ url_for('static', filename='favicon.png') }}">
+        <meta property="og:url" content="https://127.0.0.1:5000/">
+        <meta property="og:type" content="website">
+        {% if file_info.file.lower().endswith(('.mp4', '.webm', '.ogg')) %}
+            <meta property="og:type" content="video.other">
+            <meta property="og:video" content="{{ url_for('get', file_id=file_info.id, _external=True) }}">
+            <meta property="og:video:type" content="video/{{ file_info.file.split('.')[-1] }}">
+        {% endif %}
+        {% if file_info.file.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.webp')) %}
+            <meta property="og:type" content="image">
+            <meta property="og:image" content="{{ url_for('get', file_id=file_info.id, _external=True) }}">
+        {% endif %}
+        <title>ezfiles 📁</title>
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <a href="/" style="text-decoration: none; color: inherit;">
+                <h1>ezfiles 📁</h1>
+            </a>
+            <div class="box">
+                <h2>{{ file_info.file }}</h2>
+                <p>uploaded on {{ file_info.timestamp }}</p>
+                <p>remaining days: {{ (datetime.fromisoformat(file_info.expires) - datetime.now(timezone.utc)).days }}</p>
+                {% if file_info.max_downloads %}
+                    <p>remaining downloads: {{ file_info.max_downloads - file_info.downloads }}</p>
+                {% endif %}
+                {% if file_info.password %}
+                <div id="password-prompt" class="modal">
+                    <div class="modal-content">
+                        <h2>password protection</h2>
+                        <input class="option" type="password" id="access-password" placeholder="password">
+                        <a style="margin-top: 20px; display: flex; justify-content: center;" class="button" onclick="checkPassword()">access file</a>
+                    </div>
+                </div>
+                {% endif %}
+                <div id="file-content" {% if file_info.password %}style="display: none;"{% endif %}>
+                    {% if file_info.file.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.webp')) %}
+                        {% if os.path.getsize(os.path.join(config['UPLOAD_FOLDER'], file_info.id + os.path.splitext(file_info.file)[1])) <= 32 * 1024 * 1024 %}
+                            <div id="preview-container" class="preview-container" 
+                                 data-preview-type="image"
+                                 data-file-extension="{{ file_info.file.split('.')[-1] }}">
+                                {% if not file_info.password %}
+                                    <img src="{{ url_for('get', file_id=file_info.id) }}" class="media-preview">
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            <p style="color: #e74c3c;">❌ this file is too big for previewing!</p>
+                        {% endif %}
+                    {% endif %}
+                    {% if file_info.file.lower().endswith(('.mp4', '.webm', '.ogg')) %}
+                        {% if os.path.getsize(os.path.join(config['UPLOAD_FOLDER'], file_info.id + os.path.splitext(file_info.file)[1])) <= 32 * 1024 * 1024 %}
+                            <div id="preview-container" class="preview-container" 
+                                 data-preview-type="video"
+                                 data-file-extension="{{ file_info.file.split('.')[-1] }}">
+                                {% if not file_info.password %}
+                                    <video controls class="media-preview">
+                                        <source src="{{ url_for('get', file_id=file_info.id) }}" type="video/{{ file_info.file.split('.')[-1] }}">
+                                        your browser doesn't support video playback.
+                                    </video>
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            <p style="color: #e74c3c;">❌ this file is too big for previewing!</p>
+                        {% endif %}
+                    {% endif %}
+                    {% if file_info.file.lower().endswith(('.mp3', '.wav', '.ogg', '.m4a')) %}
+                        {% if os.path.getsize(os.path.join(config['UPLOAD_FOLDER'], file_info.id + os.path.splitext(file_info.file)[1])) <= 32 * 1024 * 1024 %}
+                            <div id="preview-container" class="preview-container" 
+                                 data-preview-type="audio"
+                                 data-file-extension="{{ file_info.file.split('.')[-1] }}">
+                                {% if not file_info.password %}
+                                    <audio controls class="media-preview">
+                                        <source src="{{ url_for('get', file_id=file_info.id) }}" type="audio/{{ file_info.file.split('.')[-1] }}">
+                                        your browser doesn't support audio playback.
+                                    </audio>
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            <p style="color: #e74c3c;">❌ this file is too big for previewing!</p>
+                        {% endif %}
+                    {% endif %}
+                </div>                
+                {% if file_info.password %}
+                    <a style="margin-right: 3px; margin-bottom: 5px;" 
+                    href="{{ url_for('get', file_id=file_info.id) }}?password={{ session.get('file_access_' + file_info.id) }}" 
+                    class="button" 
+                    id="download-button" 
+                    style="display: none;">📲 download</a>
+                {% else %}
+                    <a style="margin-right: 3px; margin-bottom: 5px;" 
+                    href="{{ url_for('get', file_id=file_info.id) }}" 
+                    class="button">📲 download</a>
+                {% endif %}
+                <a onclick="reportFile('{{ file_info.id }}')" class="button">🛑 report</a>
+                <a style="margin-left: 3px; margin-top: 5px;" onclick="deleteFile('{{ file_info.id }}')" class="button">🗑️ delete</a>
+            </div>            
+            <p><a href="/tos">terms of service</a> | <a href="/privacy-policy">privacy policy</a></p>
+            <p>developed by v1per</p>
+        </div>
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+    </body>
+</html>

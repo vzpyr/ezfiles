@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta property="og:title" content="ezfiles 📁">
+        <meta property="og:description" content="share anything you want">
+        <meta property="og:image" content="{{ url_for('static', filename='favicon.png') }}">
+        <meta property="og:url" content="https://127.0.0.1:5000/">
+        <meta property="og:type" content="website">
+        <title>ezfiles 📁</title>
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <a href="/" style="text-decoration: none; color: inherit;">
+                <h1>ezfiles 📁</h1>
+            </a>
+            <h2>privacy policy</h2>
+            <div class="code-view">by using ezfiles, you agree to these policies. if you disagree, do not use this service.
+
+last updated: 1st march 2025
+
+data we collect:
+- your ip address (for abuse prevention and security)
+- the timestamp when a file is uploaded
+no personal account or identifying information is required
+
+how we use this data:
+- to prevent abuse and illegal activity
+- to comply with legal obligations when required
+we do not sell, share, or use this data for tracking or advertising
+
+data retention:
+- uploaded files are stored until they are manually deleted using the delete button on the download page
+- ip addresses and timestamps are kept for security purposes and automatically deleted with uploaded files
+
+your rights:
+- you have the right to request access, correction, or deletion of your stored data aslong as you provide proof of ownership
+- if you lose your 6-digit deletion key, we cannot verify ownership and cannot process any file-specific requests
+- to make a request, contact us via telegram (@rqvrs) and we will respond within 30 days 
+
+third-party services:
+- this site does not use third-party tracking or analytics services
+
+changes to this policy:
+- we may update this policy, and changes will be posted here</div>
+            <p><a href="/tos">terms of service</a> | <a href="/privacy-policy">privacy policy</a></p>
+            <p>developed by v1per</p>
+        </div>
+    </body>
+</html>

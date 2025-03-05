@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta property="og:title" content="ezfiles 📁">
+        <meta property="og:description" content="share anything you want">
+        <meta property="og:image" content="{{ url_for('static', filename='favicon.png') }}">
+        <meta property="og:url" content="https://127.0.0.1:5000/">
+        <meta property="og:type" content="website">
+        <title>ezfiles 📁</title>
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <a href="/" style="text-decoration: none; color: inherit;">
+                <h1>ezfiles 📁</h1>
+            </a>
+            <h2>terms of service</h2>
+            <div class="code-view">by using ezfiles, you agree to these terms. if you disagree, do not use this service.
+
+last updated: 1st march 2025
+
+prohibited content:
+- csam
+- terrorist material
+- non-consensual content
+- hate speech
+- pirated material
+- malware
+uploading any of this content will result in removal, possible reporting to authorities and a ban
+
+liability disclaimer:
+- ezfiles is provided without warranties. users upload files at their own risk
+
+bans:
+- users uploading csam, terrorist material, or non-consensual content will receive a ban and be reported
+- users uploading malware may receive a permanent ban and severe cases may be reported
+- users uploading hate speech or pirated material may receive a temporary ban based on severity
+- abusing the report system, including false or spam reports, may result in a temporary ban
+
+reporting violations:
+- to report prohibited content, use the report button on the download page</div>
+            <p><a href="/tos">terms of service</a> | <a href="/privacy-policy">privacy policy</a></p>
+            <p>developed by v1per</p>
+        </div>
+    </body>
+</html>

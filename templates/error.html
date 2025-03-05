@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta property="og:title" content="ezfiles 📁">
+        <meta property="og:description" content="share anything you want">
+        <meta property="og:image" content="{{ url_for('static', filename='favicon.png') }}">
+        <meta property="og:url" content="https://127.0.0.1:5000/">
+        <meta property="og:type" content="website">
+        <title>ezfiles 📁</title>
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <a href="/" style="text-decoration: none; color: inherit;">
+                <h1>ezfiles 📁</h1>
+            </a>
+            <div class="box">
+                <h1 class="error-code">{{ error_code }}</h1>
+                <h2 class="error-message">{{ error_message }}</h2>
+                <p class="error-description">{{ error_description }}</p>
+                <a href="/" class="button">go back 🏠</a>
+            </div>
+            <p><a href="/tos">terms of service</a> | <a href="/privacy-policy">privacy policy</a></p>
+            <p>developed by v1per</p>
+        </div>
+    </body>
+</html>

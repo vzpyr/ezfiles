@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta property="og:title" content="ezfiles 📁">
+        <meta property="og:description" content="share anything you want">
+        <meta property="og:image" content="{{ url_for('static', filename='favicon.png') }}">
+        <meta property="og:url" content="https://127.0.0.1:5000/">
+        <meta property="og:type" content="website">
+        <title>ezfiles 📁</title>
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <a href="/" style="text-decoration: none; color: inherit;">
+                <h1>ezfiles 📁</h1>
+            </a>
+            <div id="drop-zone">
+                <p>drop a file here or click here 📎</p>
+                <input type="file" id="file-input" hidden>
+            </div>
+            <div id="options" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <h2>options</h2>
+                    <div class="option-row">
+                        <label class="option-label" for="expiration-days">expires after:</label>
+                        <select class="option" id="expiration-days">
+                            <option value="1">1 day</option>
+                            <option value="7">7 days</option>
+                            <option value="14">14 days</option>
+                            <option value="30" selected>30 days</option>
+                        </select>
+                    </div>
+                    <div class="option-row">
+                        <label class="option-label" for="max-downloads">max downloads:</label>
+                        <input class="option" type="number" id="max-downloads" placeholder="unlimited">
+                    </div>
+                    <div class="option-row">
+                        <label class="option-label" for="file-password">password:</label>
+                        <input class="option" type="password" id="file-password" placeholder="none">
+                    </div>
+                    <div style="margin-top: 20px; display: flex; justify-content: center;">
+                        <a style="margin-right: 5px;" onclick="confirmUpload()" class="button">📲 upload</a>
+                        <a style="margin-left: 5px; background-color: #e74c3c;" onclick="cancelUpload()" class="button">❌ cancel</a>
+                    </div>
+                </div>
+            </div>
+            <div id="result"></div>
+            <div id="progress-container" style="display: none;">
+                <div id="progress-bar-outer"><div id="progress-bar-inner"></div></div>
+                <p id="progress-text">0%</p>
+            </div>
+            <p><a href="/tos">terms of service</a> | <a href="/privacy-policy">privacy policy</a></p>
+            <p>developed by v1per</p>
+        </div>
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+    </body>
+</html>
