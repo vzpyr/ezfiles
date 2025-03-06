@@ -10,5 +10,5 @@ simple file hosting platform
 # how to use
 1. install python3
 2. install requirements: `pip install -r requirements.txt`
-3. set an uploadfolder and secret_key in app.py
+3. set an 'uploadfolder' and 'secret_key' in app.py
 4. start the app: `python3 app.py`
