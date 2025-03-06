@@ -244,4 +244,4 @@ def internal_error(error):
 
 # main function
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
