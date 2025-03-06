@@ -4,7 +4,7 @@ simple file hosting platform
 # features
 - anonymous uploads
 - password protection
-- auto-expire after X days and X downloads
+- auto-expiry after X days and X downloads
 - previews for media (image, video, audio)
 
 # how to use
