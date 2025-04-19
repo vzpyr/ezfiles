@@ -13,9 +13,9 @@ uploadfolder = 'ezfiles'
 os.makedirs(uploadfolder, exist_ok=True)
 
 app = Flask(__name__)
+app.secret_key = '3a125a54-eecc-498c-8301-0e6347957b84'
 app.config['MAX_CONTENT_LENGTH'] = 512 * 1024 * 1024
 app.config['UPLOAD_FOLDER'] = uploadfolder
-app.secret_key = '3q2H^Z*YXA6HMKy79tY7'
 
 limiter = Limiter(
     app=app,
